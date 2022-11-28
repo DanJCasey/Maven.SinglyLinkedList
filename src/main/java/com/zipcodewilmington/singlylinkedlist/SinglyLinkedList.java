@@ -55,4 +55,97 @@ public class SinglyLinkedList<T extends Comparable<T>> {
     public Boolean contains(T valueToFind){
         return this.find(valueToFind) >= 0;
     }
+
+    public void remove(T valueToFind){
+        Node current = head;
+        Node last = head;
+        while(current != null) {
+            if(current.data.equals(valueToFind))
+                if(current.next == null) {
+                    last.next = null;
+                } else if (current == last){
+                    head = current.next;
+                }
+            else {
+                last.next = current.next;
+                }
+            last = current;
+            current = current.next;
+        }
+    }
+    public void display(){
+        Node current = head;
+        System.out.println("Nodes of singly linked list:");
+        while(current != null){
+            System.out.println(current.data + "");
+            current = current.next;
+        }
+    }
+    public T get(Integer index){
+        Node current = head;
+        Integer currentIndex = 0;
+        if(index >= size())
+            return null;
+        if(index == size() - 1)
+            return (T)tail.data;
+        for(int i = 0; i < index; i++){
+            current = current.next;
+        }
+        return (T)current.data;
+    }
+    public SinglyLinkedList<T> copy() {
+        SinglyLinkedList<T> copiedList = new SinglyLinkedList<T>();
+        Node current = head;
+        while(current != null) {
+            copiedList.addNode((T)current.data);
+            current = current.next;
+        }
+        return copiedList;
+    }
+
+    public void set(Integer index, T valueToSet) {
+        Node current = head;
+        for(int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        current.data = valueToSet;
+    }
+    public void sort(){
+        Node current = head;
+        for(int i = 0; i < size(); i++){
+            current = head;
+            while(current.next != null){
+                if(compareTo((T)current.data, (T)current.next.data) > 0){
+                    T nextVal = (T)current.next.data;
+                    current.next.data = current.data;
+                    current.data = nextVal;
+                }
+                current = current.next;
+            }
+        }
+    }
+    public SinglyLinkedList<T> slice(int start, int end){
+        SinglyLinkedList<T> subList = new SinglyLinkedList<T>();
+        for(int i = 0; i < end; i++){
+            if(i >= start)
+                subList.addNode(get(i));
+        }
+        return subList;
+    }
+    public void reverse(){
+        Node original = head;
+        Node previous = null;
+        Node current = null;
+        while(original != null){
+            current = original;
+            original = original.next;
+
+            current.next = previous;
+            previous = current;
+            head = current;
+        }
+    }
+    public int compareTo (T o, T o2) {
+        return o.compareTo(o2);
+    }
 }
