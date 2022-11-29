@@ -8,7 +8,7 @@ import org.junit.Test;
 public class SinglyLinkedListTest {
 
     @Test
-    public void testAd() {
+    public void testAdd() {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<Integer>();
         list.addNode(1);
         list.addNode(2);
@@ -82,6 +82,7 @@ public class SinglyLinkedListTest {
         Float expected = 2.3f;
         Float expected2 = 1.8f;
 
+
         list.addNode(1.0f);
         list.addNode(1.3f);
         list.addNode(2.3f);
@@ -92,6 +93,11 @@ public class SinglyLinkedListTest {
 
         Float actual = copied.get(2);
         Float actual2 = list.get(2);
+        System.out.println(expected);
+        System.out.println(expected2);
+        System.out.println(actual);
+        System.out.println(actual2);
+
 
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(expected2, actual2);
